@@ -1,0 +1,894 @@
+:root {
+  --bg-dark: #081022;
+  --glass: rgba(255, 255, 255, 0.06);
+  --accent1: #00d4ff;
+  --accent2: #7a2bff;
+  --muted: #bfc7d3;
+  --radius: 12px;
+  --max-width: 1100px;
+  --glass-2: rgba(0, 0, 0, 0.45);
+}
+
+* {
+  box-sizing: border-box
+}
+
+html {
+  scroll-padding-top: 72px;
+  /* Adjust this value to the exact height of your fixed header */
+  /* You might also want to set scroll-behavior for smooth scrolling: */
+  scroll-behavior: smooth;
+}
+
+body {
+  height: 100%
+}
+
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #e6eef8;
+  background: linear-gradient(180deg, #041022 0%, #07162a 100%);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+/* NAV */
+.nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 60;
+  backdrop-filter: blur(6px);
+  background: linear-gradient(180deg, rgba(8, 16, 34, 0.6), rgba(8, 16, 34, 0.2));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.nav__container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+}
+
+.brand {
+  font-weight: 700;
+  color: var(--accent1)
+}
+
+.nav__links {
+  display: flex;
+  gap: 14px;
+  align-items: center
+}
+
+.nav__links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.95rem
+}
+
+.btn {
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  color: #041022;
+  padding: 10px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.btn.ghost,
+.btn.small.ghost {
+  background: transparent;
+  color: var(--accent1);
+  border: 1px solid rgba(255, 255, 255, 0.06)
+}
+
+.btn.small {
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  border-radius: 8px
+}
+
+.nav__toggle {
+  display: none;
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  font-size: 18px
+}
+
+/* HERO */
+.hero {
+  min-height: 95vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding-top: 72px;
+  /* space for nav */
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("images/banner.png");
+  background-size: cover;
+  background-position: center;
+  filter: contrast(1.05) saturate(1.02) grayscale(0.06);
+  transform: scale(1.03);
+  z-index: 0;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(7, 8, 20, 0.45) 0%, rgba(0, 0, 0, 0.42) 45%, rgba(10, 10, 30, 0.55) 100%);
+  z-index: 1;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 980px;
+  padding: 48px 20px;
+  margin: 0 16px;
+  border-radius: 14px;
+  color: #eef8ff;
+  backdrop-filter: blur(6px);
+}
+
+.hero__title {
+  font-size: clamp(1.6rem, 4.6vw, 3.2rem);
+  margin: 0 0 8px 0;
+  letter-spacing: -0.02em;
+}
+
+.neon {
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.hero__subtitle {
+  color: var(--muted);
+  margin: 0 0 18px 0;
+  font-size: 1rem
+}
+
+.hero__actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 18px
+}
+
+.project-badges {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 18px;
+  flex-wrap: wrap
+}
+
+.badge {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.5);
+}
+
+.badge .icon {
+  width: 18px;
+  height: 18px;
+  fill: var(--accent1);
+  opacity: 0.95
+}
+
+/* SECTIONS */
+.section {
+  padding: 100px 0
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px
+}
+
+h2 {
+  color: #dff4ff;
+  margin: 0 0 18px 0;
+  font-size: 1.4rem
+}
+
+/* Projects cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(2, 6, 23, 0.45);
+  transition: transform .28s ease, box-shadow .28s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 46px rgba(2, 6, 23, 0.6)
+}
+
+.card__icon {
+  font-size: 28px;
+  margin-bottom: 6px
+}
+
+.card h3 {
+  margin: 6px 0 10px 0
+}
+
+.card p {
+  color: var(--muted);
+  margin: 0 0 12px 0;
+  font-size: 0.95rem
+}
+
+.tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap
+}
+
+.tags span {
+  font-size: 0.82rem;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 6px 8px;
+  border-radius: 8px
+}
+
+/* Skills grid */
+.skill-grid {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px
+}
+
+.skill-grid li {
+  background: var(--glass);
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--muted)
+}
+
+/* Contact form */
+.contact-form {
+  max-width: 720px;
+  display: grid;
+  gap: 12px
+}
+
+.contact-form label {
+  display: block;
+  color: var(--muted)
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: transparent;
+  color: #eaf6ff;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 6px
+}
+
+/* Footer */
+.footer {
+  padding: 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  color: var(--muted)
+}
+
+.footer .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center
+}
+
+/* Responsive */
+@media (max-width:880px) {
+  .nav__links {
+    display: none
+  }
+
+  .nav__toggle {
+    display: block
+  }
+
+  .hero__content {
+    padding: 28px 14px
+  }
+}
+
+/* small utilities */
+.text-center {
+  text-align: center
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* space between photo & name */
+  font-weight: 700;
+  color: var(--accent1);
+}
+
+.brand-logo {
+  width: 36px;
+  /* adjust size */
+  height: 36px;
+  border-radius: 50%;
+  /* makes it circular */
+  object-fit: cover;
+  border: 2px solid var(--accent1);
+  /* optional border */
+}
+
+/* Default state */
+.skill-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.skill-logos img {
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  cursor: pointer;
+  filter: brightness(0.6);
+  /* dim by default */
+}
+
+.skill-logos img:hover {
+  transform: scale(1.3);
+  filter: brightness(1.6) drop-shadow(0 0 15px var(--accent1));
+}
+
+/* Main section titles */
+.section h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 28px;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+}
+
+/* Subheadings in About (timeline items) */
+.timeline .details h3 {
+  font-size: 1.1rem;
+  color: #9caeff;
+  /* soft bluish-purple */
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.section {
+  padding: 80px 0;
+  /* instead of 64px 0 */
+}
+
+/* Project card images */
+.card img {
+  width: 100%;
+  height: 220px;
+  /* fix height so all images look uniform */
+  object-fit: cover;
+  /* makes sure the image fills box without distortion */
+  border-radius: 8px;
+  /* smooth corners */
+  margin-bottom: 1rem;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  align-items: stretch;
+  /* ensures cards align evenly */
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* keeps description & stack inside */
+  height: 100%;
+  /* forces equal height */
+}
+
+.card .tags {
+  margin-top: auto;
+  /* pushes stack to bottom of card */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.card .tags span {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.85rem;
+  color: #fff;
+}
+
+/* Reduce top padding only for Projects section */
+/* Projects Section Layout */
+#projects.section {
+  padding-top: 20px;
+  /* reduce gap from top */
+  padding-bottom: 60px;
+  background: #060c1c;
+  /* slightly darker than rest of page for contrast */
+}
+
+/* Heading styling */
+#projects h1 {
+  margin-top: 0;
+  text-align: center;
+  font-size: 1.8rem;
+  color: var(--accent1);
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+  /* bring cards closer */
+}
+
+/* Project cards grid */
+#projects .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 22px;
+  justify-content: center;
+}
+
+.section {
+  padding: 40px 0;
+  /* was 64px */
+}
+
+/* Ensure cards stretch equally in height */
+.cards {
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* Each card should take equal height and flex space */
+.card {
+  background: #1a1a2e;
+  padding: 20px;
+  border-radius: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Flex-grow to ensure description fills remaining space */
+.card p {
+  flex-grow: 1;
+}
+
+/* Align tech stack section to the bottom of each card */
+.card .tech-stack {
+  margin-top: auto;
+}
+
+.card h4 {
+  margin-bottom: 10px;
+}
+
+/* Ensure tags appear in one line within each card */
+.card .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.card .tags span {
+  background-color: #3b3b6d;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+.footer .socials a {
+  margin-left: 15px;
+  font-size: 2rem;
+  /* Bigger icons */
+  text-decoration: none;
+}
+
+/* GitHub icon - white for dark background */
+.footer .socials a[aria-label="GitHub"] i {
+  color: #ffffff;
+  /* White so it's visible */
+}
+
+/* LinkedIn icon - keep brand blue */
+.footer .socials a[aria-label="LinkedIn"] i {
+  color: #0A66C2;
+  /* LinkedIn brand blue */
+}
+
+/* Optional hover effect */
+.footer .socials a:hover i {
+  opacity: 0.8;
+  transform: scale(1.1);
+  /* slightly grow on hover */
+  transition: all 0.2s ease;
+}
+
+.footer {
+  background: rgba(0, 0, 40, 0.8);
+  /* your dark blue */
+  padding: 20px 0;
+  text-align: center;
+  margin-top: auto;
+  /* forces footer to stay at bottom after content */
+}
+
+/* Navigation link styling */
+.nav__links a {
+  font-size: 1.2rem;
+  /* larger text */
+  font-weight: 600;
+  /* semi-bold */
+  color: #f0f4ff;
+  /* soft light blue to match dark background */
+  text-decoration: none;
+  padding: 8px 12px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover effect for a professional highlight */
+.nav__links a:hover {
+  color: #4da6ff;
+  /* brighter blue on hover */
+  transform: translateY(-2px);
+  /* slight lift */
+}
+
+/* If you want the active section highlighted */
+.nav__links a.active {
+  color: #66ccff;
+  border-bottom: 2px solid #66ccff;
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+/* Default styles */
+.btn-primary {
+  background: linear-gradient(45deg, #4da6ff, #9c6bff);
+  color: white;
+  border: none;
+}
+
+.btn-secondary {
+  background: #0d1b2a;
+  color: #fff;
+  border: 2px solid #4da6ff;
+}
+
+/* Active style */
+.btn.active {
+  background: #66ccff !important;
+  /* Highlighted color */
+  color: #000 !important;
+  transform: scale(1.05);
+}
+
+#about {
+  padding-top: 50px;
+  /* pushes the section down */
+  margin-top: 20px;
+  /* extra gap below navbar */
+}
+
+.section__title {
+  margin-top: 20px;
+  /* space above INTRODUCTION */
+  text-align: center;
+  font-size: 2rem;
+  color: #b388eb;
+  /* same purple accent */
+}
+
+#contact {
+  margin-bottom: 0;
+  /* remove extra gap */
+  padding-bottom: 40px;
+  /* keep a little breathing room */
+}
+
+.footer {
+  /* ... (keep existing styles) ... */
+  padding: 20px 0;
+  /* A bit more padding for breathing room */
+}
+
+.footer p {
+  color: var(--muted);
+  /* Use your muted color for consistency */
+  font-size: 1rem;
+  /* A standard font size */
+  margin-bottom: 0;
+  /* Remove bottom margin to align with socials */
+}
+
+.footer .container {
+  display: flex;
+  flex-direction: column;
+  /* Stack the copyright and socials on top of each other */
+  align-items: center;
+  gap: 10px;
+}
+
+.socials {
+  display: flex;
+  /* Display icons and text side by side */
+  justify-content: center;
+  gap: 20px;
+}
+
+.socials a {
+  /* Keep display: flex, align-items: center, and gap for alignment */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* Maintain a nice gap between icon and text */
+  font-size: 0.9rem;
+  /* Adjust this value (original was 1rem, now trying 0.9rem) */
+  /* You can go smaller, e.g., 0.8rem, 0.75rem */
+  color: var(--muted);
+  /* Ensure consistent color */
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+/* Ensure the hover effect still works well with smaller text */
+.socials a:hover {
+  color: var(--accent1);
+}
+
+a subtle hover effect */
+
+
+.socials a i {
+  font-size: 1.2rem;
+  /* A good size for the icons */
+}
+.socials {
+    gap: 15px; /* Reduce gap between icons if they are smaller */
+}
+
+/* Add this to the end of your CSS file */
+html {
+  scroll-padding-top: 72px;
+  /* Set this to the height of your fixed header */
+}
+
+/* You can also do it for just the contact section: */
+#contact {
+  /* ... existing styles ... */
+  padding-top: 100px;
+  /* Or add extra top padding to push it down */
+}
+
+/* NAV */
+.nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 60;
+  /* High z-index is good for a fixed header */
+  backdrop-filter: blur(6px);
+  background: linear-gradient(180deg, rgba(8, 16, 34, 0.6), rgba(8, 16, 34, 0.2));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.nav__container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  /* This makes brand and nav__links side-by-side */
+  align-items: center;
+  justify-content: space-between;
+  /* Pushes brand to left, nav__links to right */
+  padding: 14px 20px;
+}
+
+.brand {
+  font-weight: 700;
+  color: var(--accent1);
+  display: flex;
+  /* You added this for logo+text */
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent1);
+}
+
+.nav__links {
+  display: flex;
+  /* This is the default for desktop */
+  gap: 14px;
+  align-items: center
+}
+
+.nav__links a {
+  /* ... styles for links ... */
+}
+
+.nav__toggle {
+  display: none;
+  /* Hidden by default on desktop */
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  font-size: 18px
+}
+
+/* Responsive */
+@media (max-width:880px) {
+  .nav__links {
+    display: none
+  }
+
+  /* Hides nav links on small screens */
+  .nav__toggle {
+    display: block
+  }
+
+  /* Shows toggle button on small screens */
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  /* This is shorthand for top:0; right:0; bottom:0; left:0; */
+  background-image: url("images/banner.png");
+  /* <--- THIS IS YOUR CSS PATH */
+  background-size: cover;
+  background-position: center;
+  filter: contrast(1.05) saturate(1.02) grayscale(0.06);
+  transform: scale(1.03);
+  z-index: 0;
+}
+
+.hero__bg {
+  /* ... other styles ... */
+  background-image: url("Images/Banner.png");
+  /* <-- Fix the path here (Images/Banner.png) */
+  /* ... other styles ... */
+}
+
+/* Add this to your style.css, preferably at the top or in a general section */
+/* For the name next to the logo in the header */
+.brand span {
+  font-size: 1.1rem;
+  /* Adjust this value as needed, e.g., 1rem, 0.9rem */
+  /* You had a font-weight:700 on .brand, so this span will inherit that.
+       If you want it less bold, you could add: font-weight: 500; */
+}
+
+/* For the "Built with ❤️" text in the footer */
+.footer p {
+  font-size: 0.9rem;
+  /* Adjust this value as needed, e.g., 0.8rem, 0.75rem */
+  /* Ensure this is consistent with any other .footer p rules */
+  margin-bottom: 0;
+  /* To keep it aligned if you stack footer content */
+}
+
+/* If you have this rule, make sure it's updated or consistent */
+.footer .container {
+  display: flex;
+  flex-direction: column;
+  /* Keep column for stacking copyright and socials */
+  align-items: center;
+  gap: 10px;
+}
+@media (max-width:880px){
+  .nav__links{ display:none }
+  .nav__toggle{ display:block }
+  .hero__content{ padding:28px 14px } /* You already had this for smaller hero content padding */
+}
+/* For the text labels next to the social icons in the footer */
+.socials a {
+    /* Keep display: flex, align-items: center, and gap for alignment */
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Maintain a nice gap between icon and text */
+    font-size: 0.9rem; /* Adjust this value (original was 1rem, now trying 0.9rem) */
+    /* You can go smaller, e.g., 0.8rem, 0.75rem */
+    color: var(--muted); /* Ensure consistent color */
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+/* Ensure the hover effect still works well with smaller text */
+.socials a:hover {
+    color: var(--accent1);
+}
+/* For the text labels "GitHub" and "LinkedIn" in the footer */
+.socials a span {
+    font-size: 0.85rem; /* Adjust this value as needed, e.g., 0.8rem, 0.75rem */
+    /* This targets the <span> tags inside the <a> social links */
+}
+
+/* You might also want to ensure the overall container for the socials
+   is not adding extra padding or margins if the text and icons are very small */
+.socials {
+    gap: 12px; /* Adjust gap between icon and text if needed */
+}
+
+/* Ensure the main footer paragraph (copyright) is also small */
+.footer p {
+    font-size: 0.85rem; /* Consistent with social text, or adjust as desired */
+}
